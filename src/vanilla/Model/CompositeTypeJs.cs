@@ -21,7 +21,6 @@ namespace AutoRest.NodeJS.Model
 
         public CompositeTypeJs(string name) : base(name)
         {
-
         }
 
         public override Property Add(Property item)
@@ -35,6 +34,8 @@ namespace AutoRest.NodeJS.Model
         }
 
         public string NameAsFileName => Name.EqualsIgnoreCase("index") ? "IndexModelType" : (string)Name;
+
+        public bool AdditionalProperties { get; set; }
 
         /// <summary>
         /// Gets or sets the discriminator property for polymorphic types.

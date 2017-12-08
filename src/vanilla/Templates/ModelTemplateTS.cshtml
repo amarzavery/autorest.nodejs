@@ -43,6 +43,9 @@
     {
   @:@(CompositeTypeJs.PropertyTS(propertyList[i], true));
     }
-
+    if (Model.AdditionalProperties)
+    {
+  @:[property: string]: any;
+    }
 @:}
 }

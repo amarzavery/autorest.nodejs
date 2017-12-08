@@ -24,7 +24,7 @@ namespace AutoRest.NodeJS
 
             SwaggerExtensions.NormalizeClientModel(codeModel);
             PopulateAdditionalProperties(codeModel);
-
+            ProcessAdditionalProperties(codeModel);
             NormalizeOdataFilterParameter(codeModel);
 
             foreach (var method in codeModel.Methods)
@@ -97,6 +97,18 @@ namespace AutoRest.NodeJS
                     }));
                 }
             }
+        }
+
+        private void ProcessAdditionalProperties(CodeModelJs cm)
+        {
+            bool isAdditionalPropertiesTrue(Property p)
+            {
+                return p.Name.EqualsIgnoreCase("additionalProperties") && p.SerializedName == null && p.ModelType is DictionaryTypeJs;
+            }
+            var modelTypes = cm.ModelTypes.Cast<CompositeTypeJs>();
+            modelTypes.Where(
+                m => m.Properties != null &&
+                m.Remove(isAdditionalPropertiesTrue) > 0).ForEach(m1 => m1.AdditionalProperties = true);
         }
     }
 }

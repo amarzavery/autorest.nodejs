@@ -10,6 +10,7 @@ using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using AutoRest.NodeJS.Model;
 
 namespace AutoRest.NodeJS
 {
@@ -816,6 +817,11 @@ namespace AutoRest.NodeJS
                 builder.AppendLine("type: {")
                          .Indent()
                          .AppendLine("name: 'Composite',");
+                var compositeJs = composite as CompositeTypeJs;
+                if (compositeJs != null && compositeJs.AdditionalProperties)
+                {
+                    builder.AppendLine("additionalProperties: true,");
+                }
                 if (composite.BaseIsPolymorphic)
                 {
                     builder = ConstructPolymorphicDiscriminator(composite, builder);
