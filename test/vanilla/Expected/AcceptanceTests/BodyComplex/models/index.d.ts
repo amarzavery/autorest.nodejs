@@ -115,13 +115,11 @@ export interface Salmon extends Fish {
  * @class
  * Initializes a new instance of the SmartSalmon class.
  * @constructor
- * @member {object} [additionalProperties] Unmatched properties from the
- * message are deserialized this collection
  * @member {string} [collegeDegree]
  */
 export interface SmartSalmon extends Salmon {
-  additionalProperties?: { [propertyName: string]: any };
   collegeDegree?: string;
+  [property: string]: any;
 }
 
 /**

@@ -21,10 +21,10 @@ const models = require('./models');
 const operations = require('./operations');
 
 
-/** Class representing a AutoRestHttpInfrastructureTestService. */
-class AutoRestHttpInfrastructureTestService extends ServiceClient {
+/** Class representing a PetStoreInc. */
+class PetStoreInc extends ServiceClient {
   /**
-   * Create a AutoRestHttpInfrastructureTestService.
+   * Create a PetStoreInc.
    * @param {string} [baseUri] - The base URI of the service.
    * @param {object} [options] - The parameter options
    * @param {Array} [options.filters] - Filters to be added to the request pipeline
@@ -45,17 +45,11 @@ class AutoRestHttpInfrastructureTestService extends ServiceClient {
 
     let packageInfo = this.getPackageJsonInfo(__dirname);
     this.addUserAgentInfo(`${packageInfo.name}/${packageInfo.version}`);
-    this.httpFailure = new operations.HttpFailure(this);
-    this.httpSuccess = new operations.HttpSuccess(this);
-    this.httpRedirects = new operations.HttpRedirects(this);
-    this.httpClientFailure = new operations.HttpClientFailure(this);
-    this.httpServerFailure = new operations.HttpServerFailure(this);
-    this.httpRetry = new operations.HttpRetry(this);
-    this.multipleResponses = new operations.MultipleResponses(this);
+    this.petOperations = new operations.PetOperations(this);
     this.models = models;
     msRest.addSerializationMixin(this);
   }
 
 }
 
-module.exports = AutoRestHttpInfrastructureTestService;
+module.exports = PetStoreInc;
