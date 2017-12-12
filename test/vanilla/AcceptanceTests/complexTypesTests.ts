@@ -428,11 +428,20 @@ describe('nodejs', function () {
         ],
         "fishtype": "smart_salmon",
         "location": "alaska",
-        "iswild": true
+        "iswild": true,
+        "additionalProperty1": 1,
+        "additionalProperty2": false,
+        "additionalProperty3": "hello",
+        "additionalProperty4": {
+          "a": 1,
+          "b": 2
+        },
+        "additionalProperty5": [
+          1,
+          3
+        ],
       };
 
-      // Still need to support additionalProperties: true.
-      //Today Autorest converts additionalProperties: <boolean value> into a dictionary all the time.
       it('should get complicated polymorphic types', function (done) {
         testClient.polymorphism.getComplicated(function (err, result, req, res) {
           should.not.exist(err);
@@ -441,12 +450,16 @@ describe('nodejs', function () {
         });
       });
 
-      // This test will fail until we support addtionalProperties with boolean value in Autorest.
-      it.skip('should put complicated polymorphic types', function (done) {
+      it('should put complicated polymorphic types', function (done) {
         testClient.polymorphism.putComplicated(rawSalmon, function (err, result, req, res) {
           should.not.exist(err);
-          console.dir(result, { depth: null });
-          assert.deepEqual(result, rawSalmon);
+          res.statusCode.should.equal(200);
+          let serializedPayload = JSON.parse(req['body']);
+          serializedPayload.additionalProperty1.should.equal(1);
+          serializedPayload.additionalProperty2.should.equal(false);
+          serializedPayload.additionalProperty3.should.equal('hello');
+          assert.deepEqual(serializedPayload.additionalProperty4, { "a": 1, "b": 2 });
+          assert.deepEqual(serializedPayload.additionalProperty5, [1, 3]);
           done();
         });
       });
