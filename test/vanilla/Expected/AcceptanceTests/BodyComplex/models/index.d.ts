@@ -119,6 +119,10 @@ export interface Salmon extends Fish {
  */
 export interface SmartSalmon extends Salmon {
   collegeDegree?: string;
+  /**
+   * @property Describes unknown properties. The value of an unknown property
+   * can be of "any" type.
+   */
   [property: string]: any;
 }
 

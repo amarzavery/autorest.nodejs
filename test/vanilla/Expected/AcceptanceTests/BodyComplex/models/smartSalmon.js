@@ -37,7 +37,18 @@ class SmartSalmon extends models['Salmon'] {
       serializedName: 'smart_salmon',
       type: {
         name: 'Composite',
-        additionalProperties: true,
+        additionalProperties: {
+          type: {
+            name: 'Dictionary',
+            value: {
+                required: false,
+                serializedName: 'ObjectElementType',
+                type: {
+                  name: 'Object'
+                }
+            }
+          }
+        },
         polymorphicDiscriminator: {
           serializedName: 'fishtype',
           clientName: 'fishtype'

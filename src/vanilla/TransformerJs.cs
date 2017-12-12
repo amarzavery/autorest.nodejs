@@ -105,10 +105,20 @@ namespace AutoRest.NodeJS
             {
                 return p.Name.EqualsIgnoreCase("additionalProperties") && p.SerializedName == null && p.ModelType is DictionaryTypeJs;
             }
+
             var modelTypes = cm.ModelTypes.Cast<CompositeTypeJs>();
-            modelTypes.Where(
-                m => m.Properties != null &&
-                m.Remove(isAdditionalPropertiesTrue) > 0).ForEach(m1 => m1.AdditionalProperties = true);
+            foreach(var model in modelTypes)
+            {
+                var modelProperties = model.Properties.ToList();
+                foreach (var property in modelProperties)
+                {
+                    if (isAdditionalPropertiesTrue(property))
+                    {
+                        model.AdditionalProperties = (property.ModelType as DictionaryTypeJs).ValueType;
+                        model.Remove(property);
+                    }
+                }
+            }
         }
     }
 }

@@ -51,8 +51,7 @@ class Pet {
             serializedName: 'DaysOfWeek',
             defaultValue: 'Friday',
             type: {
-              name: 'Enum',
-              allowedValues: [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ]
+              name: 'String'
             }
           },
           intEnum: {
