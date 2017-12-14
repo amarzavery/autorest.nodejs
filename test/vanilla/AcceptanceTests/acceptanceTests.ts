@@ -461,8 +461,7 @@ describe('nodejs', function () {
         testClient.enumModel.putReferencedConstant(options, function (err, result) {
           should.not.exist(err);
           testClient.enumModel.getReferencedConstant(function (err, result) {
-            should.not.exist(err);
-            console.log(result);            
+            should.not.exist(err);          
             (result as any).colorConstant.should.equal('green-color');
             done();
           });

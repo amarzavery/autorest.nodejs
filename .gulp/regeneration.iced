@@ -83,6 +83,7 @@ defaultMappings = {
   'AcceptanceTests/ModelFlattening': 'model-flattening.json',
   'AcceptanceTests/UrlMultiCollectionFormat' : 'url-multi-collectionFormat.json',
   'AcceptanceTests/ExtensibleEnums': 'extensible-enums-swagger.json'
+  'AcceptanceTests/AdditionalProperties': 'additionalProperties.json'
 }
 
 defaultAzureMappings = {
